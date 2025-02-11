@@ -52,34 +52,32 @@ const Login = () => {
     navigate("/notes");
   };
 
-  //function for handle login with credentials
+  //로그인 함수
   const onLoginHandler = async (data) => {
     try {
-      setLoading(true);
+      setLoading(true); //로딩 시작
       const response = await api.post("/auth/public/signin", data);
 
       //showing success message with react hot toast
-      toast.success("Login Successful");
+      toast.success("로그인 성공");
 
-      //reset the input field by using reset() function provided by react hook form after submission
-      reset();
+      reset(); //입력창 리셋
 
       if (response.status === 200 && response.data.jwtToken) {
         setJwtToken(response.data.jwtToken);
         const decodedToken = jwtDecode(response.data.jwtToken);
+        console.log(decodedToken); //토큰 해석
         if (decodedToken.is2faEnabled) {
           setStep(2); // Move to 2FA verification step
         } else {
           handleSuccessfulLogin(response.data.jwtToken, decodedToken);
         }
       } else {
-        toast.error(
-          "Login failed. Please check your credentials and try again."
-        );
+        toast.error("로그인 실패! 유저네임과 패스워드 확인 필요");
       }
     } catch (error) {
       if (error) {
-        toast.error("Invalid credentials");
+        toast.error("로그인 실패! 에러 발생");
       }
     } finally {
       setLoading(false);

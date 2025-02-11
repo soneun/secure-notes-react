@@ -7,6 +7,7 @@ import State from "./LandingPageCom/State";
 import Testimonial from "./LandingPageCom/Testimonial/Testimonial";
 import { useMyContext } from "../store/ContextApi";
 
+//위에서 내려오는 애니메이션
 const fadeInFromTop = {
   hidden: { opacity: 0, y: -50 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
@@ -16,6 +17,7 @@ const fadeInFromBotom = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
+//밑에서 올라오는 애니메이션
 const LandingPage = () => {
   // Access the token  state by using the useMyContext hook from the ContextProvider
   const { token } = useMyContext();
@@ -29,7 +31,7 @@ const LandingPage = () => {
           animate="visible"
           variants={fadeInFromTop}
         >
-          Turn your thoughts into secure, organized notes And Faster.
+          원하는 노트를 작성해 보세요.
         </motion.h1>
         <h3 className="text-logoText md:text-2xl text-xl font-semibold text-slate-800 text-center">
           The #1 secure note-taking app.
